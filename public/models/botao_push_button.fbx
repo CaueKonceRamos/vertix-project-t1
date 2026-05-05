@@ -1,0 +1,11 @@
+let buttonMesh;
+
+loader.load('models/button.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+
+  // posição na protoboard
+  fbx.position.set(3.5, 0.5, 1);
+
+  buttonMesh = fbx;
+  scene.add(fbx);
+});

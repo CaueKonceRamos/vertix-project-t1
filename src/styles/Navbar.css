@@ -1,0 +1,53 @@
+.editor-navbar {
+  background: var(--background-color);
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-left h2 {
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.user-name {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.save-btn {
+  background: var(--success-color);
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.save-btn:hover {
+  background: #059669;
+}

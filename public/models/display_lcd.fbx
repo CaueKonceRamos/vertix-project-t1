@@ -1,0 +1,11 @@
+let lcd;
+
+loader.load('models/display_lcd.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+
+  // posição mais visível (tipo painel)
+  fbx.position.set(0, 1.5, 2);
+
+  lcd = fbx;
+  scene.add(fbx);
+});

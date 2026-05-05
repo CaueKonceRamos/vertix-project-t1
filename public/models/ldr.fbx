@@ -1,0 +1,20 @@
+let lightLevel = 1;
+
+window.addEventListener('mousemove', (e) => {
+  // simula luz com posição do mouse
+  lightLevel = e.clientX / window.innerWidth;
+});
+
+setInterval(() => {
+  if (!ledMesh) return;
+
+  const isDark = lightLevel < 0.5;
+
+  ledMesh.traverse((child) => {
+    if (child.isMesh) {
+      child.material.emissive = new THREE.Color(
+        isDark ? 0xff0000 : 0x000000
+      );
+    }
+  });
+}, 200);

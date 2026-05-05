@@ -1,0 +1,11 @@
+let esp32;
+
+loader.load('models/esp32.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+
+  // posição central (substituindo Arduino)
+  fbx.position.set(0, 0, 0);
+
+  esp32 = fbx;
+  scene.add(fbx);
+});

@@ -1,0 +1,125 @@
+.canvas-object {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background: var(--background-color);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.canvas-object:hover {
+  transform: scale(1.05);
+}
+
+.canvas-object.selected {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.canvas-object.simulating {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.object-icon {
+  font-size: 2rem;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+
+.object-icon img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.object-controls {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  background: var(--background-color);
+  border-radius: 6px;
+  padding: 4px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.canvas-object.selected .object-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.control-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+.control-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.connect-btn {
+  background: #f59e0b;
+  color: white;
+}
+
+.connect-btn:hover {
+  background: #d97706;
+}
+
+.canvas-object.connecting {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+}
+
+.delete-btn:hover {
+  background: var(--danger-color);
+}
+
+.selection-box {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  pointer-events: none;
+  animation: selection-pulse 2s infinite;
+}
+
+@keyframes selection-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

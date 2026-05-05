@@ -1,0 +1,11 @@
+let buzzer;
+
+loader.load('models/buzzer.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+
+  // posição na protoboard
+  fbx.position.set(2.5, 0.5, 1);
+
+  buzzer = fbx;
+  scene.add(fbx);
+});

@@ -1,0 +1,11 @@
+loader.load('models/resistor.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+
+  // posição na protoboard
+  fbx.position.set(3, 0.5, 1);
+
+  // rotação para ficar deitado
+  fbx.rotation.z = Math.PI / 2;
+
+  scene.add(fbx);
+});

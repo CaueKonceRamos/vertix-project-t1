@@ -1,0 +1,11 @@
+let servo;
+
+loader.load('models/servo.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+
+  // posição fora da protoboard
+  fbx.position.set(-2, 0.5, 2);
+
+  servo = fbx;
+  scene.add(fbx);
+});

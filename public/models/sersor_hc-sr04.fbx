@@ -1,0 +1,20 @@
+let distance = 100;
+
+window.addEventListener('mousemove', (e) => {
+  distance = (e.clientX / window.innerWidth) * 100;
+});
+
+// exemplo: usar distância pra controlar LED
+setInterval(() => {
+  if (!ledMesh) return;
+
+  const isClose = distance < 30;
+
+  ledMesh.traverse((child) => {
+    if (child.isMesh) {
+      child.material.emissive = new THREE.Color(
+        isClose ? 0xff0000 : 0x000000
+      );
+    }
+  });
+}, 200);

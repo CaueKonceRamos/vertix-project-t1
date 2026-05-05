@@ -1,0 +1,10 @@
+loader.load('models/arduino.fbx', (fbx) => {
+  fbx.scale.set(0.01, 0.01, 0.01);
+
+  // Centralizar
+  const box = new THREE.Box3().setFromObject(fbx);
+  const center = box.getCenter(new THREE.Vector3());
+  fbx.position.sub(center);
+
+  scene.add(fbx);
+});

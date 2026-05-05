@@ -1,0 +1,22 @@
+let ledMesh;
+
+loader.load('models/led.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+  fbx.position.set(3.2, 0.6, 1);
+
+  ledMesh = fbx;
+  scene.add(fbx);
+});
+
+// Piscar LED
+setInterval(() => {
+  if (!ledMesh) return;
+
+  ledMesh.traverse((child) => {
+    if (child.isMesh) {
+      child.material.emissive = new THREE.Color(
+        Math.random() > 0.5 ? 0xff0000 : 0x000000
+      );
+    }
+  });
+}, 500);

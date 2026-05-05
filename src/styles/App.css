@@ -1,0 +1,44 @@
+/* Estilos globais do App */
+.app {
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Remover bordas arredondadas globalmente */
+* {
+  border-radius: 0 !important;
+}
+
+/* Cores mais sérias - paleta monocromática */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color: #7f8c8d;
+  --background-color: #ffffff;
+  --surface-color: #f8f9fa;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --border-color: #e9ecef;
+}
+
+/* Remover animações e transições */
+* {
+  transition: none !important;
+  animation: none !important;
+}
+
+.main-content {
+  padding-top: 1rem;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px;
+  }
+
+  .simulation-panel {
+    width: 280px;
+  }
+}

@@ -1,0 +1,11 @@
+loader.load('models/protoboard.fbx', (fbx) => {
+  fbx.scale.set(0.02, 0.02, 0.02);
+
+  // posição ao lado do Arduino
+  fbx.position.set(4, 0, 0);
+
+  // correção de rotação se necessário
+  fbx.rotation.x = -Math.PI / 2;
+
+  scene.add(fbx);
+});

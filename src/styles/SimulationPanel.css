@@ -1,0 +1,70 @@
+.simulation-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 32, 0.9);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.simulation-panel {
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  background: rgba(18, 24, 38, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+}
+
+.simulation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.simulation-header h3 {
+  color: white;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.simulation-header p {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.simulation-close-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.simulation-close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.simulation-view {
+  flex: 1;
+  position: relative;
+}
+
+.simulation-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+}

@@ -1,0 +1,46 @@
+.toolbar {
+  background: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toolbar-btn {
+  background: var(--surface-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toolbar-btn:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: white;
+}
+
+.simulation-btn.active {
+  background: var(--success-color);
+  color: white;
+}
+
+.simulation-btn.active:hover {
+  background: #059669;
+}
+
+.toolbar-info {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}

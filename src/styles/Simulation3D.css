@@ -1,0 +1,14 @@
+.simulation-3d-container {
+  width: 100%;
+  height: calc(100% - 86px);
+  position: relative;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.04), transparent 40%),
+              radial-gradient(circle at bottom right, rgba(33,147,255,0.08), transparent 25%),
+              #0a0f1f;
+}
+
+.simulation-3d-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

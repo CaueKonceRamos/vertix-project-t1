@@ -1,0 +1,51 @@
+.canvas {
+  flex: 1;
+  background: linear-gradient(180deg, var(--surface-color) 0%, var(--background-color) 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.canvas-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.connection-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.connection-line {
+  opacity: 0.9;
+}
+
+.canvas-connection-status {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  padding: 10px 14px;
+  background: rgba(17, 24, 39, 0.85);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  z-index: 20;
+}
+
+.canvas-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.canvas-empty p {
+  margin-bottom: 0.5rem;
+}
