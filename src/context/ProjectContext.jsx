@@ -262,10 +262,13 @@ const response = await fetch(`${API_BASE}/api/projects/${projectId}`, {
         await loadClassrooms()
         return true
       }
+
+      const errorData = await response.json()
+      throw new Error(errorData.error || 'Erro ao entrar na turma')
     } catch (error) {
       console.error('Erro ao entrar na turma:', error)
+      return false
     }
-    return false
   }, [loadClassrooms])
 
   const openClassroom = useCallback(async (classroomId) => {
