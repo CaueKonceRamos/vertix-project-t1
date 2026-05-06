@@ -37,15 +37,33 @@
 
 .navbar-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.exit-project-btn,
+.save-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.exit-project-btn {
+  background: #f8fafc;
+  color: #1f2937;
+  border: 1px solid #cbd5e1;
+}
+
+.exit-project-btn:hover {
+  background: #e2e8f0;
 }
 
 .save-btn {
   background: var(--success-color);
   color: white;
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  font-weight: 500;
 }
 
 .save-btn:hover {

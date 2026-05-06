@@ -143,7 +143,7 @@ export const ProjectProvider = ({ children }) => {
 
     try {
       const updatedData = { objects, connections }
-const response = await fetch(`${API_BASE}/api/projects/${currentProject.id}`, {
+      const response = await fetch(`${API_BASE}/api/projects/${currentProject.id}`, {
         method: 'PUT',
         headers: getHeaders(),
         body: JSON.stringify({ data: updatedData })
@@ -156,6 +156,13 @@ const response = await fetch(`${API_BASE}/api/projects/${currentProject.id}`, {
       console.error('Erro ao salvar projeto:', error)
     }
   }, [currentProject, objects, connections])
+
+  const closeProject = useCallback(() => {
+    setCurrentProject(null)
+    setObjects([])
+    setConnections([])
+    setSelectedObject(null)
+  }, [])
 
   const updateProject = useCallback(async (projectId, updates = {}) => {
     try {
@@ -392,6 +399,7 @@ const response = await fetch(`${API_BASE}/api/projects/${projectId}`, {
     currentProject,
     createProject,
     openProject,
+    closeProject,
     deleteProject,
     saveCurrentProject,
 
