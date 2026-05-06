@@ -339,35 +339,46 @@ const MyProjectsScreen = ({ onNavigate }) => {
         </div>
 
         <div className="projects-grid">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="project-card">
-              <div className="project-card-top">
-                <div className="project-preview">
-                  <div className="project-placeholder">{project.name?.slice(0, 2).toUpperCase()}</div>
+          {filteredProjects.map((project) => {
+            const projectData = typeof project.data === 'string' ? JSON.parse(project.data) : project.data
+            const projectImage = projectData?.media?.image
+            
+            return (
+              <div key={project.id} className="project-card">
+                <div className="project-card-top">
+                  <div className="project-preview">
+                    {projectImage ? (
+                      <img src={projectImage} alt={project.name} />
+                    ) : (
+                      <div className="project-placeholder">{project.name?.slice(0, 2).toUpperCase()}</div>
+                    )}
+                  </div>
+                  <div className="project-tag">{project.classroom_id ? 'Turma' : 'Independente'}</div>
                 </div>
-                <div className="project-tag">{project.classroom_id ? 'Turma' : 'Independente'}</div>
-              </div>
 
-              <div className="project-card-body">
-                <h3>{project.name}</h3>
-                <p>{project.description || 'Sem descrição disponível.'}</p>
-                <div className="project-info-row">
-                  <span>{project.classroom_id ? 'Vinculado a turma' : 'Projeto independente'}</span>
-                  <span>{new Date(project.created_at || project.createdAt).toLocaleDateString('pt-BR')}</span>
+                <div className="project-card-body">
+                  <h3>{project.name}</h3>
+                  <p>{project.description || 'Sem descrição disponível.'}</p>
+                  <div className="project-info-row">
+                    <span>{project.classroom_id ? 'Vinculado a turma' : 'Projeto independente'}</span>
+                    <span>{new Date(project.created_at || project.createdAt).toLocaleDateString('pt-BR')}</span>
+                  </div>
+                </div>
+
+                <div className="project-card-footer">
+                  <button className="action-btn primary" onClick={() => handleOpen(project.id)}>
+                    Abrir
+                  </button>
+                  <button className="action-btn secondary" onClick={() => handleEdit(project)}>
+                    Editar
+                  </button>
+                  <button className="action-btn danger" onClick={() => handleDelete(project.id)}>
+                    Excluir
+                  </button>
                 </div>
               </div>
-
-              <div className="project-card-footer">
-                <button className="action-btn primary" onClick={() => handleOpen(project.id)}>
-                  Abrir
-                </button>
-                <button className="action-btn secondary" onClick={() => handleEdit(project)}>
-                  Editar
-                </button>
-                <button className="action-btn danger" onClick={() => handleDelete(project.id)}>
-                  Excluir
-                </button>
-              </div>
+            )
+          })}
             </div>
           ))}
         </div>

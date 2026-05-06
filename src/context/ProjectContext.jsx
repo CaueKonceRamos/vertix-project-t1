@@ -41,6 +41,11 @@ export const ProjectProvider = ({ children }) => {
     localStorage.removeItem('user')
   }, [])
 
+  // Atualizar perfil do usuário
+  const updateUserProfile = useCallback((updatedUser) => {
+    setCurrentUser(updatedUser)
+  }, [])
+
   // Carregar dados do usuário logado
   const loadUserData = useCallback(async () => {
     const token = localStorage.getItem('token')
@@ -396,6 +401,7 @@ const response = await fetch(`${API_BASE}/api/projects/${projectId}`, {
     currentUser,
     login,
     logout,
+    updateUserProfile,
 
     // Projetos
     projects,

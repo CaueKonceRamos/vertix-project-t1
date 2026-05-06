@@ -333,6 +333,185 @@
   color: white;
 }
 
+.project-form-section {
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.form-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.form-header h2 {
+  font-size: 1.5rem;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.form-header p {
+  color: #6b7280;
+  margin: 0;
+}
+
+.project-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-column label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.form-column input,
+.form-column textarea,
+.form-column select {
+  padding: 0.95rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #111827;
+  background: white;
+  font-family: inherit;
+}
+
+.form-column textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-column input:focus,
+.form-column textarea:focus,
+.form-column select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.image-preview {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.attachment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.attachment-name {
+  background: #f3f4f6;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.edit-note {
+  color: #f59e0b;
+  font-size: 0.9rem;
+  background: #fef3c7;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.form-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  margin-bottom: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 0.95rem 1.4rem;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+.project-form-section .create-btn {
+  border: none;
+  padding: 0.95rem 1.4rem;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.project-form-section .create-btn:hover:not(:disabled) {
+  background: #0f172a;
+}
+
+.project-form-section .create-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .project-form {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-form-section {
+    padding: 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .project-form-section .create-btn {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .my-projects-screen {
     padding: 1rem;

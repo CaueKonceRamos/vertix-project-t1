@@ -1,11 +1,22 @@
 import React, { useState } from 'react'
 import { useProject } from '../context/ProjectContext'
+import ProfileEditModal from './ProfileEditModal'
 import '../styles/DashboardScreen.css'
 import Footer from './Footer'
 
 export default function DashboardLayout({ onNavigate, activeItem, children }) {
-  const { currentUser, logout } = useProject()
+  const { currentUser, logout, updateUserProfile } = useProject()
   const [showProfileMenu, setShowProfileMenu] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
+
+  const handleEditProfile = () => {
+    setShowProfileMenu(false)
+    setShowEditModal(true)
+  }
+
+  const handleSaveProfile = (updatedUser) => {
+    updateUserProfile(updatedUser)
+  }
 
   return (
     <div className="dashboard-container">
@@ -29,7 +40,7 @@ export default function DashboardLayout({ onNavigate, activeItem, children }) {
           </div>
           {showProfileMenu && (
             <div className="profile-dropdown">
-              <button type="button" className="dropdown-item" onClick={() => alert('Editar perfil ainda não implementado')}>
+              <button type="button" className="dropdown-item" onClick={handleEditProfile}>
                 Editar perfil
               </button>
               <button type="button" className="dropdown-item" onClick={logout}>
@@ -79,6 +90,12 @@ export default function DashboardLayout({ onNavigate, activeItem, children }) {
 
         <main className="dashboard-content-area">{children}</main>
       </div>
+      <ProfileEditModal 
+        isOpen={showEditModal} 
+        user={currentUser} 
+        onClose={() => setShowEditModal(false)} 
+        onSave={handleSaveProfile}
+      />
       <Footer />
     </div>
   )
