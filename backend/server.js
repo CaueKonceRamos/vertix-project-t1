@@ -45,15 +45,19 @@ app.use((err, req, res, next) => {
   })
 })
 
-// Iniciar servidor
+// Iniciar servidor apenas em ambiente local
 const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-  console.log(`
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`
 ╔════════════════════════════════════════╗
 ║  ⚡ VOLTIX Backend - Iniciado           ║
 ║  Port: ${PORT}                          ║
 ║  Environment: ${process.env.NODE_ENV}       ║
 ║  URL: http://localhost:${PORT}         ║
 ╚════════════════════════════════════════╝
-  `)
-})
+    `)
+  })
+}
+
+export default app
