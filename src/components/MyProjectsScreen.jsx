@@ -391,7 +391,6 @@ const MyProjectsScreen = ({ onNavigate }) => {
             </button>
           </div>
         )}
-      </div>
     </DashboardLayout>
   )
 }
