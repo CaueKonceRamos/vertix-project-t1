@@ -5,6 +5,10 @@
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow);
+  position: sticky;
+  top: 70px;
+  align-self: flex-start;
+  height: calc(100vh - 70px);
 }
 
 .sidebar-header {

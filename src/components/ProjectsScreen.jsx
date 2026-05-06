@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useProject } from '../context/ProjectContext'
 import ClassroomDetails from './ClassroomDetails'
+import Footer from './Footer'
 import '../styles/DashboardScreen.css'
 
 export default function DashboardScreen({ onNavigate }) {
@@ -522,11 +523,6 @@ export default function DashboardScreen({ onNavigate }) {
               )}
             </div>
 
-            <div className="nav-section user-actions">
-              <button className="logout-btn" onClick={logout}>
-                🚪 Sair da Conta
-              </button>
-            </div>
           </nav>
         </aside>
 
@@ -535,58 +531,7 @@ export default function DashboardScreen({ onNavigate }) {
           {renderContent()}
         </main>
       </div>
-
-      {/* Footer */}
-      <footer className="dashboard-footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <div className="footer-logo">
-              <span className="logo-icon">⚡</span>
-              <span className="logo-text">VolTix</span>
-            </div>
-            <p>Plataforma de simulação e prototipagem desenvolvida no contexto da disciplina de Internet das Coisas (IoT), ministrada pelo professor Heleno Cardoso. </p>
-          </div>
-
-          <div className="footer-links">
-            <div className="footer-section">
-              <h4>Navegação</h4>
-              <ul>
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Turmas</a></li>
-                <li><a href="#">Projetos</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-section">
-              <h4>Recursos</h4>
-              <ul>
-                <li><a href="#">Tutoriais</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Ajuda</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-section">
-              <h4>Suporte</h4>
-              <ul>
-                <li><a href="#">Contato</a></li>
-                <li><a href="#">Reportar bug</a></li>
-                <li><a href="#">Sugestões</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <div className="footer-legal">
-            <a href="#">Termos de uso</a>
-            <a href="#">Política de privacidade</a>
-          </div>
-          <div className="footer-copyright">
-            © 2026 VolTix, por: Beatriz de Abreu, Cauê Valverde e Gustavo de Jesus. Todos os direitos reservados.
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Modal de criação de turma */}
       {showCreateClassroomModal && (

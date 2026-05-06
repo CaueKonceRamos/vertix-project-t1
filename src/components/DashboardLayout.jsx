@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useProject } from '../context/ProjectContext'
 import '../styles/DashboardScreen.css'
+import Footer from './Footer'
 
 export default function DashboardLayout({ onNavigate, activeItem, children }) {
   const { currentUser, logout } = useProject()
@@ -73,48 +74,12 @@ export default function DashboardLayout({ onNavigate, activeItem, children }) {
               </button>
             </div>
 
-            <div className="nav-section user-actions">
-              <button className="logout-btn" onClick={logout}>
-                🚪 Sair da Conta
-              </button>
-            </div>
           </nav>
         </aside>
 
         <main className="dashboard-content-area">{children}</main>
       </div>
-
-      <footer className="dashboard-footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <div className="footer-logo">
-              <span className="logo-icon">⚡</span>
-              <span className="logo-text">VolTix</span>
-            </div>
-            <p>Plataforma de simulação e prototipagem desenvolvida no contexto da disciplina de Internet das Coisas (IoT).</p>
-          </div>
-
-          <div className="footer-links">
-            <div className="footer-section">
-              <h4>Navegação</h4>
-              <ul>
-                <li><button type="button" className="footer-link" onClick={() => onNavigate('dashboard')}>Início</button></li>
-                <li><button type="button" className="footer-link" onClick={() => onNavigate('classroom')}>Turmas</button></li>
-                <li><button type="button" className="footer-link" onClick={() => onNavigate('my-projects')}>Projetos</button></li>
-              </ul>
-            </div>
-
-            <div className="footer-section">
-              <h4>Recursos</h4>
-              <ul>
-                <li><span className="footer-link">Tutoriais</span></li>
-                <li><span className="footer-link">Ajuda</span></li>
-                <li><span className="footer-link">Suporte</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
