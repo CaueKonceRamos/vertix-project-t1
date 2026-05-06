@@ -138,6 +138,42 @@
   font-style: italic;
 }
 
+@media (max-width: 768px) {
+  .projects-main {
+    padding: 1rem;
+  }
+  
+  .projects-navbar {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .projects-navbar h1 {
+    font-size: 1.25rem;
+  }
+  
+  .create-form {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  
+  .create-form input {
+    min-width: unset;
+    width: 100%;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .project-card {
+    padding: 1rem;
+  }
+}
+
 /* Turmas */
 .classrooms-section {
   margin-bottom: 3rem;

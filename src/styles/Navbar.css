@@ -81,3 +81,30 @@
 .save-btn:hover {
   background: #059669;
 }
+
+@media (max-width: 768px) {
+  .editor-navbar {
+    padding: 0.5rem 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .navbar-left h2 {
+    font-size: 1.1rem;
+  }
+  
+  .project-name {
+    font-size: 0.95rem;
+  }
+  
+  .navbar-actions {
+    width: 100%;
+    gap: 0.5rem;
+  }
+  
+  .save-btn, .exit-project-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    flex: 1;
+  }
+}

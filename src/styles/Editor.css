@@ -17,3 +17,13 @@
   flex-direction: column;
   min-height: 0;
 }
+
+@media (max-width: 768px) {
+  .editor-main {
+    flex-direction: column;
+  }
+  
+  .editor-workspace {
+    width: 100%;
+  }
+}

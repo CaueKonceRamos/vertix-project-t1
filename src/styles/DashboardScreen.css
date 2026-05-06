@@ -598,6 +598,39 @@
   margin-bottom: 0;
 }
 
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 0 1rem;
+    height: auto;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  
+  .header-center {
+    margin: 0;
+    width: 100%;
+    order: 3;
+  }
+  
+  .search-bar input {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .header-right {
+    gap: 0.5rem;
+  }
+  
+  .header-btn {
+    padding: 0.35rem;
+    font-size: 1rem;
+  }
+}
+
 .section-header {
   padding: 1.5rem;
   border-bottom: 1px solid #e9ecef;

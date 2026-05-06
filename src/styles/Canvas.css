@@ -49,3 +49,14 @@
 .canvas-empty p {
   margin-bottom: 0.5rem;
 }
+
+@media (max-width: 768px) {
+  .canvas-connection-status {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+  
+  .canvas-empty {
+    font-size: 0.95rem;
+  }
+}

@@ -449,6 +449,38 @@
   color: white;
 }
 
+@media (max-width: 768px) {
+  .classroom-screen {
+    padding: 1rem;
+  }
+  
+  .classroom-header {
+    padding: 1.25rem;
+    gap: 1rem;
+    flex-direction: column;
+  }
+  
+  .classroom-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .classroom-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .classroom-header-actions {
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .action-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    flex: 1;
+  }
+}
+
 .btn-primary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
