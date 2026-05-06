@@ -379,8 +379,7 @@ const MyProjectsScreen = ({ onNavigate }) => {
               </div>
             )
           })}
-            </div>
-          ))}
+        </div>
         </div>
 
         {filteredProjects.length === 0 && (
