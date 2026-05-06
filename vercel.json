@@ -13,6 +13,7 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "backend/server.js" },
-    { "src": "/((?!assets|favicon).*)", "dest": "/index.html" }
+    { "src": "/icons/(.*)", "dest": "/icons/$1" },
+    { "src": "/((?!assets|icons|favicon).*)", "dest": "/index.html" }
   ]
 }
