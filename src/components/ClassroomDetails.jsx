@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useProject } from '../context/ProjectContext'
+import { API_BASE } from '../utils/api.js'
 import '../styles/DashboardScreen.css'
 
 function getHeaders() {
@@ -32,8 +33,8 @@ export default function ClassroomDetails({ classroom, onBack }) {
 
       try {
         const [membersResponse, projectsResponse] = await Promise.all([
-          fetch(`http://localhost:5000/api/classrooms/${classroom.id}/members`, { headers: getHeaders() }),
-          fetch(`http://localhost:5000/api/classrooms/${classroom.id}/projects`, { headers: getHeaders() })
+          fetch(`${API_BASE}/api/classrooms/${classroom.id}/members`, { headers: getHeaders() }),
+          fetch(`${API_BASE}/api/classrooms/${classroom.id}/projects`, { headers: getHeaders() })
         ])
 
         if (!membersResponse.ok || !projectsResponse.ok) {
@@ -100,7 +101,7 @@ export default function ClassroomDetails({ classroom, onBack }) {
       </div>
 
       <div className="classroom-tabs">
-        {['dashboard', 'gallery'].map(tab => (
+        {['dashboard'].map(tab => (
           <button
             key={tab}
             type="button"
@@ -205,34 +206,6 @@ export default function ClassroomDetails({ classroom, onBack }) {
                 </div>
               </div>
             </>
-          )}
-
-          {activeTab === 'gallery' && (
-            <div className="gallery-panel">
-              <div className="panel-header">
-                <h4>Projetos da turma</h4>
-                <span>{projects.length} projetos</span>
-              </div>
-
-              {projects.length === 0 ? (
-                <p className="empty-state">Nenhum projeto disponível. Crie o primeiro!</p>
-              ) : (
-                <div className="project-gallery-grid">
-                  {projects.map(project => (
-                    <div key={project.id} className="project-card-small">
-                      <div>
-                        <h5>{project.name}</h5>
-                        <p>{project.description || 'Sem descrição'}</p>
-                        <small>por {project.user_name}</small>
-                      </div>
-                      <button type="button" onClick={() => openProject(project.id)}>
-                        Abrir
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
           )}
 
         </div>

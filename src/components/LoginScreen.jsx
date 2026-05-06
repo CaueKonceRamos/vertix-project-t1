@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useProject } from '../context/ProjectContext'
+import { API_BASE } from '../utils/api.js'
 import '../styles/LoginScreen.css'
 
 export default function LoginScreen() {
@@ -15,6 +16,47 @@ export default function LoginScreen() {
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const { login } = useProject()
+
+  const demoAccounts = {
+    teacher: {
+      email: 'professor@voltix.com',
+      password: 'senha123'
+    },
+    student: {
+      email: 'aluno@voltix.com',
+      password: 'senha123'
+    }
+  }
+
+  const handleQuickLogin = async (role) => {
+    const demo = demoAccounts[role]
+    if (!demo) return
+
+    setLoading(true)
+    setErrors({})
+
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: demo.email,
+          password: demo.password
+        })
+      })
+
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error)
+
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      login(data.user)
+    } catch (err) {
+      setErrors({ general: err.message })
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -104,7 +146,7 @@ export default function LoginScreen() {
     try {
       if (isLogin) {
         // LOGIN
-        const response = await fetch('http://localhost:5000/api/auth/login', {
+        const response = await fetch(`${API_BASE}/api/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -123,7 +165,7 @@ export default function LoginScreen() {
 
       } else {
         // REGISTRO
-        const response = await fetch('http://localhost:5000/api/auth/register', {
+        const response = await fetch(`${API_BASE}/api/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -253,6 +295,17 @@ export default function LoginScreen() {
               Criar conta
             </button>
           </div>
+
+          {isLogin && (
+            <div className="quick-login-buttons">
+              <button type="button" className="quick-login-btn teacher" onClick={() => handleQuickLogin('teacher')} disabled={loading}>
+                Entrar como Professor
+              </button>
+              <button type="button" className="quick-login-btn student" onClick={() => handleQuickLogin('student')} disabled={loading}>
+                Entrar como Aluno
+              </button>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="auth-form">
             {isLogin ? (

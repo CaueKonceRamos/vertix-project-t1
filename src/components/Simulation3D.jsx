@@ -34,7 +34,7 @@ export default function Simulation3D({ objects, connections }) {
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(width, height)
     renderer.shadowMap.enabled = true
-    renderer.shadowMap.type = THREE.PCFShadowShadowMap
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap
     container.appendChild(renderer.domElement)
     rendererRef.current = renderer
 

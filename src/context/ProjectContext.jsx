@@ -1,5 +1,6 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { API_BASE } from '../utils/api.js'
 
 export const ProjectContext = createContext()
 
@@ -65,7 +66,7 @@ export const ProjectProvider = ({ children }) => {
   // ========== PROJETOS ==========
   const loadProjects = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/projects', {
+      const response = await fetch(`${API_BASE}/api/projects`, {
         headers: getHeaders()
       })
 
@@ -78,15 +79,32 @@ export const ProjectProvider = ({ children }) => {
     }
   }, [])
 
-  const createProject = useCallback(async (projectName, classroomId = null) => {
+  const createProject = useCallback(async (projectPayload, classroomId = null) => {
+    let name = ''
+    let description = ''
+    let classroom_id = null
+    let data = { objects: [], connections: [] }
+
+    if (typeof projectPayload === 'object' && projectPayload !== null) {
+      name = projectPayload.name
+      description = projectPayload.description || ''
+      classroom_id = projectPayload.classroom_id || null
+      data = projectPayload.data || data
+    } else {
+      name = projectPayload
+      description = ''
+      classroom_id = classroomId || null
+    }
+
     try {
-      const response = await fetch('http://localhost:5000/api/projects', {
+      const response = await fetch(`${API_BASE}/api/projects`, {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify({
-          name: projectName,
-          classroom_id: classroomId,
-          data: { objects: [], connections: [] }
+          name,
+          description,
+          classroom_id,
+          data
         })
       })
 
@@ -103,7 +121,7 @@ export const ProjectProvider = ({ children }) => {
 
   const openProject = useCallback(async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/projects/${projectId}`, {
+      const response = await fetch(`${API_BASE}/api/projects/${projectId}`, {
         headers: getHeaders()
       })
 
@@ -125,7 +143,7 @@ export const ProjectProvider = ({ children }) => {
 
     try {
       const updatedData = { objects, connections }
-      const response = await fetch(`http://localhost:5000/api/projects/${currentProject.id}`, {
+const response = await fetch(`${API_BASE}/api/projects/${currentProject.id}`, {
         method: 'PUT',
         headers: getHeaders(),
         body: JSON.stringify({ data: updatedData })
@@ -139,9 +157,40 @@ export const ProjectProvider = ({ children }) => {
     }
   }, [currentProject, objects, connections])
 
+  const updateProject = useCallback(async (projectId, updates = {}) => {
+    try {
+      const response = await fetch(`${API_BASE}/api/projects/${projectId}`, {
+        method: 'PUT',
+        headers: getHeaders(),
+        body: JSON.stringify({
+          name: updates.name,
+          description: updates.description,
+          data: updates.data
+        })
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        await loadProjects()
+        if (currentProject?.id === projectId) {
+          setCurrentProject((prev) => ({
+            ...prev,
+            name: data.project.name || prev.name,
+            description: data.project.description || prev.description,
+            data: updates.data || prev.data
+          }))
+        }
+        return data.project
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar projeto:', error)
+    }
+    return null
+  }, [currentProject, loadProjects])
+
   const deleteProject = useCallback(async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/projects/${projectId}`, {
+const response = await fetch(`${API_BASE}/api/projects/${projectId}`, {
         method: 'DELETE',
         headers: getHeaders()
       })
@@ -162,7 +211,7 @@ export const ProjectProvider = ({ children }) => {
   // ========== TURMAS ==========
   const loadClassrooms = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/classrooms', {
+      const response = await fetch(`${API_BASE}/api/classrooms`, {
         headers: getHeaders()
       })
 
@@ -177,7 +226,7 @@ export const ProjectProvider = ({ children }) => {
 
   const createClassroom = useCallback(async (name, description = '', category = null, privacy = 'public') => {
     try {
-      const response = await fetch('http://localhost:5000/api/classrooms', {
+      const response = await fetch(`${API_BASE}/api/classrooms`, {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify({ name, description, category, privacy })
@@ -196,7 +245,7 @@ export const ProjectProvider = ({ children }) => {
 
   const joinClassroom = useCallback(async (inviteCode) => {
     try {
-      const response = await fetch('http://localhost:5000/api/classrooms/join', {
+      const response = await fetch(`${API_BASE}/api/classrooms/join`, {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify({ invite_code: inviteCode })
@@ -214,7 +263,7 @@ export const ProjectProvider = ({ children }) => {
 
   const openClassroom = useCallback(async (classroomId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/classrooms/${classroomId}`, {
+      const response = await fetch(`${API_BASE}/api/classrooms/${classroomId}`, {
         headers: getHeaders()
       })
 
@@ -353,6 +402,7 @@ export const ProjectProvider = ({ children }) => {
     openClassroom,
     closeClassroom,
     joinClassroom,
+    updateProject,
 
     // Objetos
     objects,

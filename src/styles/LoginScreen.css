@@ -310,6 +310,42 @@
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
+.quick-login-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.quick-login-btn {
+  flex: 1;
+  border: none;
+  border-radius: 14px;
+  padding: 0.95rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-login-btn.teacher {
+  background: #2563eb;
+  color: white;
+}
+
+.quick-login-btn.student {
+  background: #8b5cf6;
+  color: white;
+}
+
+.quick-login-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.quick-login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 /* Formulário */
 .auth-form {
   display: flex;

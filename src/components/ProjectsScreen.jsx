@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useProject } from '../context/ProjectContext'
 import ClassroomDetails from './ClassroomDetails'
 import '../styles/DashboardScreen.css'
 
 export default function DashboardScreen({ onNavigate }) {
   const [activeSection, setActiveSection] = useState('dashboard')
-  const [showMessages, setShowMessages] = useState(false)
+  const [showProfileMenu, setShowProfileMenu] = useState(false)
   const [showCreateClassroomModal, setShowCreateClassroomModal] = useState(false)
   const [newClassroomName, setNewClassroomName] = useState('')
   const [newClassroomDescription, setNewClassroomDescription] = useState('')
@@ -27,6 +27,86 @@ export default function DashboardScreen({ onNavigate }) {
     joinClassroom,
     logout
   } = useProject()
+
+  const curiosities = [
+    {
+      category: 'Você sabia?',
+      quote: '“Bem-vindo ao VolTix! Sabia que bilhões de dispositivos IoT já estão conectados no mundo?”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“Curiosidade: a primeira lâmpada inteligente surgiu antes mesmo dos smartphones modernos.”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“Se tudo estiver conectado, até sua geladeira pode ‘pensar’ mais do que você imagina 😄”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“Você sabia? O cérebro humano gera cerca de 20 watts de energia — o suficiente para acender uma lâmpada fraca.”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“A água pode ferver e congelar ao mesmo tempo em condições específicas chamadas ponto triplo.”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“O espaço não tem som… mas sensores IoT conseguem ‘ouvir’ o universo de outra forma.”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“Um bug não é só erro de código — o termo veio de um inseto real encontrado em um computador em 1947.”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“A primeira linguagem de programação foi criada antes mesmo dos PCs existirem.”'
+    },
+    {
+      category: 'Você sabia?',
+      quote: '“Tudo que você vê aqui começou com 0 e 1… literalmente.”'
+    },
+    {
+      category: 'Olá!',
+      quote: '“Dica: até no mundo real, você também precisa ‘craftar’ suas ideias.”'
+    },
+    {
+      category: 'Olá!',
+      quote: '“Carregando mundo… construindo possibilidades infinitas.”'
+    },
+    {
+      category: 'Olá!',
+      quote: '“Cuidado: projetos grandes começam com apenas um bloco (ou um input 😄).”'
+    },
+    {
+      category: 'Olá!',
+      quote: '“Você sabia? Em jogos sandbox, a criatividade do jogador é praticamente infinita — igual aqui.”'
+    },
+    {
+      category: 'Olá! ',
+      quote: '“Bem-vindo ao VolTix — onde ideias viram projetos de IoT.”'
+    },
+    {
+      category: ' Olá!',
+      quote: '“Transforme sensores em soluções e ideias em sistemas.”'
+    },
+    {
+      category: 'Olá!',
+      quote: '“Aqui, cada projeto começa com uma conexão.”'
+    },
+    {
+      category: 'Olá!',
+      quote: '“Criando o futuro… um dispositivo por vez.”'
+    }
+  ]
+
+  const [curiosityIndex, setCuriosityIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCuriosityIndex((prev) => (prev + 1) % curiosities.length)
+    }, 8000)
+    return () => clearInterval(timer)
+  }, [curiosities.length])
 
   const isTeacher = currentUser?.role === 'teacher'
 
@@ -77,71 +157,47 @@ export default function DashboardScreen({ onNavigate }) {
   }
 
   // Dados vazios por enquanto - serão carregados da API
-  const recentChats = []
   const recentProjects = []
 
   const renderDashboard = () => (
     <div className="dashboard-content">
-      {/* Saudação */}
-      <div className="greeting-section">
-        <h1>Olá, {isTeacher ? 'Prof. ' : ''}{currentUser?.name} 👋</h1>
-        <p>
-          {isTeacher
-            ? `Você tem ${dashboardStats.turmas} turmas ativas com ${dashboardStats.alunos} alunos.`
-            : `Você tem ${dashboardStats.turmas} turmas ativas e ${dashboardStats.projetos} projetos em andamento.`
-          }
-        </p>
-      </div>
+      <div className="dashboard-hero">
+        <div>
+          <span className="hero-eyebrow">Painel VolTix</span>
+          <h1>Olá, {isTeacher ? 'Prof. ' : ''}{currentUser?.name} 👋</h1>
+          <p className="hero-copy">Bem-vindo de volta ao VolTix. Aqui você gerencia turmas, cria projetos e encontra inspiração para desenvolver suas ideias de IoT.</p>
+        </div>
 
-      {/* Cards de resumo */}
-      <div className="stats-grid">
-        <div className="stat-card turmas">
-          <div className="stat-icon">📚</div>
-          <div className="stat-info">
-            <h3>{dashboardStats.turmas}</h3>
-            <p>{isTeacher ? 'Turmas Criadas' : 'Turmas'}</p>
-          </div>
-        </div>
-        <div className="stat-card projetos">
-          <div className="stat-icon">{isTeacher ? '👥' : '🚀'}</div>
-          <div className="stat-info">
-            <h3>{isTeacher ? dashboardStats.alunos : dashboardStats.projetos}</h3>
-            <p>{isTeacher ? 'Total de Alunos' : 'Projetos'}</p>
-          </div>
-        </div>
-        <div className="stat-card mensagens">
-          <div className="stat-icon">📤</div>
-          <div className="stat-info">
-            <h3>{dashboardStats.projetos}</h3>
-            <p>{isTeacher ? 'Projetos Enviados' : 'Mensagens'}</p>
-          </div>
-        </div>
-        <div className="stat-card mensagens">
-          <div className="stat-icon">💬</div>
-          <div className="stat-info">
-            <h3>{dashboardStats.mensagens}</h3>
-            <p>Mensagens Recentes</p>
-          </div>
+        <div className="hero-actions">
+          <button className="primary-hero-btn" onClick={() => onNavigate('my-projects')}>+ Novo Projeto</button>
+          <button className="secondary-hero-btn" onClick={() => onNavigate('classroom')}>Ver minhas turmas</button>
         </div>
       </div>
 
-      {/* Área de criação rápida para professores */}
-      {isTeacher && (
-        <div className="quick-create-section">
-          <div className="quick-create-card">
-            <div className="create-icon">📚</div>
-            <h3>Criar Nova Turma</h3>
-            <p>Organize seus alunos e compartilhe projetos</p>
-            <button className="create-btn-primary" onClick={() => setShowCreateClassroomModal(true)}>+ Criar Turma</button>
-          </div>
-          <div className="quick-create-card">
-            <div className="create-icon">🚀</div>
-            <h3>Novo Projeto</h3>
-            <p>Crie um projeto para demonstrar conceitos</p>
-            <button className="create-btn-secondary" onClick={() => onNavigate('my-projects')}>+ Novo Projeto</button>
-          </div>
+      <div className="curiosity-card">
+        <div className="curiosity-meta">
+          <span className="curiosity-category">{curiosities[curiosityIndex].category}</span>
+          <button type="button" className="curiosity-next" onClick={() => setCuriosityIndex((prev) => (prev + 1) % curiosities.length)}>
+            Próxima
+          </button>
         </div>
-      )}
+        <p className="curiosity-text">{curiosities[curiosityIndex].quote}</p>
+      </div>
+
+      <div className="quick-create-section">
+        <div className="quick-create-card wide-card">
+          <div className="create-icon">🚀</div>
+          <h3>Crie seu próximo projeto</h3>
+          <p>Use o editor para montar seu protótipo IoT com sensores, componentes e lógica conectada.</p>
+          <button className="create-btn-primary" onClick={() => onNavigate('my-projects')}>Começar projeto</button>
+        </div>
+        <div className="quick-create-card wide-card">
+          <div className="create-icon">📚</div>
+          <h3>Gerencie suas turmas</h3>
+          <p>Abra o painel de turmas para ver quem está matriculado, copiar códigos e acompanhar atividades.</p>
+          <button className="create-btn-secondary" onClick={() => onNavigate('classroom')}>Ver turmas</button>
+        </div>
+      </div>
 
       {/* Minhas Turmas */}
       <div className="section">
@@ -173,9 +229,7 @@ export default function DashboardScreen({ onNavigate }) {
               </div>
               {isTeacher && (
                 <div className="turma-actions-admin">
-                  <button className="action-btn" onClick={(e) => { e.stopPropagation(); }}>👁️ Ver Galeria</button>
-                  <button className="action-btn" onClick={(e) => { e.stopPropagation(); }}>💬 Abrir Chat</button>
-                  <button className="action-btn" onClick={(e) => { e.stopPropagation(); }}>👥 Participantes</button>
+                  <button className="action-btn" onClick={(e) => { e.stopPropagation(); }}> Participantes</button>
                   <button className="action-btn" onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(classroom.invite_code); }}>📋 Copiar Código</button>
                 </div>
               )}
@@ -253,29 +307,6 @@ export default function DashboardScreen({ onNavigate }) {
         </div>
       </div>
 
-      {/* Chats Recentes */}
-      <div className="section">
-        <div className="section-header">
-          <h2>Chats das Turmas</h2>
-        </div>
-        <div className="chats-list">
-          {recentChats.map(chat => (
-            <div key={chat.id} className="chat-item">
-              <div className="chat-avatar">
-                <span>{chat.name.charAt(0)}</span>
-              </div>
-              <div className="chat-info">
-                <h4>{chat.name}</h4>
-                <p className="last-message">{chat.lastMessage}</p>
-              </div>
-              <div className="chat-meta">
-                <span className="chat-time">{chat.time}</span>
-                {chat.unread > 0 && <span className="unread-badge">{chat.unread}</span>}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   )
 
@@ -285,7 +316,7 @@ export default function DashboardScreen({ onNavigate }) {
         <h1>Minhas Turmas</h1>
         <div className="header-actions">
           {isTeacher ? (
-            <button className="create-turma-btn" onClick={() => setShowCreateClassroomModal(true)}>+ Criar Nova Turma</button>
+            <button className="primary-hero-btn" onClick={() => setShowCreateClassroomModal(true)}>+ Criar Nova Turma</button>
           ) : (
             <form className="join-form">
               <input
@@ -293,51 +324,41 @@ export default function DashboardScreen({ onNavigate }) {
                 placeholder="Código da turma"
                 className="join-input"
               />
-              <button type="submit" className="join-btn">Entrar</button>
+              <button type="submit" className="secondary-hero-btn">Entrar</button>
             </form>
           )}
         </div>
       </div>
 
-      <div className="turmas-grid-full">
-        {classrooms.length === 0 ? (
-          <div className="empty-state">
-            <p>Nenhuma turma encontrada</p>
-            <p className="hint">
-              {isTeacher ? 'Crie sua primeira turma!' : 'Peça o código da turma ao professor'}
-            </p>
-          </div>
-        ) : (
-          classrooms.map(classroom => (
+      {classrooms.length === 0 ? (
+        <div className="empty-state">
+          <p>Nenhuma turma encontrada</p>
+          <p className="hint">
+            {isTeacher ? 'Crie sua primeira turma!' : 'Peça o código da turma ao professor'}
+          </p>
+        </div>
+      ) : (
+        <div className="turmas-grid-full">
+          {classrooms.map(classroom => (
             <div key={classroom.id} className="turma-card-full" onClick={() => openClassroom(classroom.id)}>
-              <div className="turma-header">
-                <h3>{classroom.name}</h3>
-                <span className="novidades">
-                  {isTeacher ? `${classroom.member_count} alunos` : '3 novas'}
-                </span>
+              <div className="turma-card-top">
+                <div>
+                  <h3>{classroom.name}</h3>
+                  <p className="turma-subtitle">{classroom.description || 'Turma com projetos e atividades conectadas.'}</p>
+                </div>
+                <span className="turma-tag">{classroom.member_count || 0} alunos</span>
               </div>
-              <div className="turma-info">
-                {isTeacher ? (
-                  <>
-                    <p>{classroom.member_count} alunos matriculados</p>
-                    <p>Atividade: 12 mensagens hoje</p>
-                    <p className="codigo">Código: {classroom.invite_code}</p>
-                  </>
-                ) : (
-                  <>
-                    <p>Prof. Silva</p>
-                    <p>{classroom.member_count} alunos</p>
-                    <p className="codigo">Código: {classroom.invite_code}</p>
-                  </>
-                )}
+              <div className="turma-info-row">
+                <span>{isTeacher ? `Código: ${classroom.invite_code}` : `Professor: ${classroom.teacher || '---'}`}</span>
+                <span>{classroom.privacy === 'private' ? 'Privada' : 'Pública'}</span>
               </div>
               <div className="turma-actions">
-                <button className="view-turma-btn">Ver Turma</button>
+                <button className="view-turma-btn">Abrir turma</button>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 
@@ -409,8 +430,6 @@ export default function DashboardScreen({ onNavigate }) {
         return renderProjetos()
       case 'galeria':
         return <div className="placeholder-content"><h1>Galeria de Projetos</h1><p>Em breve...</p></div>
-      case 'chat':
-        return <div className="placeholder-content"><h1>Chat</h1><p>Em breve...</p></div>
       default:
         return renderDashboard()
     }
@@ -432,16 +451,23 @@ export default function DashboardScreen({ onNavigate }) {
         </div>
 
         <div className="header-right">
-          <button className="header-btn" onClick={() => setShowMessages(!showMessages)}>
-            💬
-          </button>
-          <div className="user-profile">
+          <div className="user-profile" onClick={() => setShowProfileMenu(!showProfileMenu)}>
             <img src="/api/placeholder/32/32" alt="Avatar" className="user-avatar" />
             <div className="user-info">
               <span className="user-name">{isTeacher ? `Prof. ${currentUser?.name}` : currentUser?.name}</span>
               <span className="user-role">{isTeacher ? 'Professor' : 'Estudante'}</span>
             </div>
           </div>
+          {showProfileMenu && (
+            <div className="profile-dropdown">
+              <button type="button" className="dropdown-item" onClick={() => alert('Editar perfil ainda não está implementado')}>
+                Editar perfil
+              </button>
+              <button type="button" className="dropdown-item" onClick={logout}>
+                Sair
+              </button>
+            </div>
+          )}
         </div>
       </header>
 
@@ -458,21 +484,9 @@ export default function DashboardScreen({ onNavigate }) {
               </button>
               <button
                 className="nav-item"
-                onClick={() => onNavigate('gallery')}
-              >
-                Galeria de Projetos
-              </button>
-              <button
-                className="nav-item"
                 onClick={() => onNavigate('my-projects')}
               >
                 Meus Projetos
-              </button>
-              <button
-                className="nav-item"
-                onClick={() => onNavigate('chat')}
-              >
-                Chat
               </button>
               <button
                 className="nav-item"
@@ -504,11 +518,14 @@ export default function DashboardScreen({ onNavigate }) {
                   <button className="quick-action-btn">
                     Entrar em turma
                   </button>
-                  <button className="quick-action-btn" onClick={() => onNavigate('gallery')}>
-                    Explorar projetos
-                  </button>
                 </>
               )}
+            </div>
+
+            <div className="nav-section user-actions">
+              <button className="logout-btn" onClick={logout}>
+                🚪 Sair da Conta
+              </button>
             </div>
           </nav>
         </aside>
@@ -537,7 +554,6 @@ export default function DashboardScreen({ onNavigate }) {
                 <li><a href="#">Início</a></li>
                 <li><a href="#">Turmas</a></li>
                 <li><a href="#">Projetos</a></li>
-                <li><a href="#">Chat</a></li>
               </ul>
             </div>
 
